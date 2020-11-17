@@ -32,10 +32,11 @@ public:
     times.insert(0,"[");
     times.pop_back();
     times.push_back(']');
-    freopen("/disk02/wmldata/wml/.wml.log","a",stdout);
-    cout << times << " " << message << endl;
-    fclose(stdout);
-    // fileio << times << " " << message << endl;
+    // freopen("/disk02/wmldata/wml/.wml.log","a",stdout);
+    ofstream fout(logFile,ios::app);
+    fout << times << " " << message << endl;
+    fout.close();
+    // fclose(stdout);
   }
 };
 

@@ -19,6 +19,7 @@ protected:
   void optValue(string filename, long long change);
 public:
   SysKernel();
+  bool checkDir(string dirstr);
   void addContribution(long long incValue);
   long long viewContribution();
   void addContritoday(long long incValue);

@@ -9,9 +9,23 @@ void SysKernel::fileInitCreate(string filename) {
     ofstream fout(filename);
     fout << 0;
     fout.close();
-    logger->addLog("some data " + filename + " initialized.");
+    logger.addLog("some data " + filename + " initialized.");
   }
   fin.close();
+}
+
+bool SysKernel::checkDir(string dirstr) {
+  if (opendir(dirstr.c_str())==nullptr) {
+    string path(dirstr);
+    system(string(string("mkdir -p ")+path).c_str());
+    if (opendir(dirstr.c_str())==nullptr) {
+      logger.addLog("A data folder is not detected, and the data folder initialization failed.");
+      return false;
+    }
+    logger.addLog("A folder is not detected, the data folder has been successfully initialized.");
+    return true;
+  }
+  return true;
 }
 
 void SysKernel::clearFile(const string filename) {
@@ -20,21 +34,31 @@ void SysKernel::clearFile(const string filename) {
 }
 
 long long SysKernel::readValue(string filename) {
-  freopen(filename.c_str(),"r",stdin);
+  // freopen(filename.c_str(),"r",stdin);
+  ifstream fin;
+  fin.open(filename);
   long long value;
-  cin >> value;
-  fclose(stdin);
+  fin >> value;
+  // fclose(stdin);
+  fin.close();
   return value;
 }
 
 void SysKernel::optValue(string filename, long long change) {
   long long value = readValue(filename);
-  freopen(filename.c_str(),"w",stdout);
-  cout << value+change;
-  fclose(stdout);
+  cout << value << endl;
+  // freopen(filename.c_str(),"w",stdout);
+  ofstream fout;
+  fout.open(filename);
+  fout << value+change;
+  fout.close();
+  // fclose(stdout);
 }
 
 SysKernel::SysKernel() {
+  if(!checkDir("/disk02/wmldata/wml/")) {
+    logger.addLog("Failed to create 'wml' folder.");
+  }
   fileInitCreate(contributionHandle);
   fileInitCreate(contritodayHandle);
   fileInitCreate(tirngHandle);

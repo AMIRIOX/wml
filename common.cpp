@@ -1,8 +1,11 @@
 #include "globalsys.h"
 #include "logger.cpp"
+#include "dataProcessor.h"
 
 class SysKernel;
 class SysLogger;
+class DataProcessor;
 
-SysKernel* globalSystem;
-SysLogger* logger;
+DataProcessor dataproc;
+SysKernel globalSystem;
+SysLogger logger;

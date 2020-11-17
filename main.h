@@ -3,6 +3,7 @@
 
 #include "globalsys.h"
 #include "logger.cpp"
+#include "dataProcessor.h"
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -12,7 +13,10 @@
 
 class SysKernel;
 class SysLogger;
-extern SysKernel* globalSystem;
-extern SysLogger* logger;
+class DataProcessor;
+
+extern DataProcessor dataproc;
+extern SysKernel globalSystem;
+extern SysLogger logger;
 
 #endif
