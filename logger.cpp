@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <ctime>
+#include "main.h"
 using namespace std;
 
 class SysLogger {
@@ -37,6 +38,5 @@ public:
     // fileio << times << " " << message << endl;
   }
 };
-SysLogger logger;
 
 #endif
