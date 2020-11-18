@@ -1,9 +1,25 @@
+#ifndef REFLEX_CPP_
+#define REFLEX_CPP_
+
 #include <map>
 #include <string>
 #include <iostream>
-using namepace std;
+#include "main.h"
+using namespace std;
 
-void taskInterface() {
+static string version = "0.0.1";
 
+static void taskInterface(const char** args, int num) {
+  string cmd("task ");
+  for(int i=0;i<num;i++) {
+    cmd+=args[i];
+    cmd+=" ";
+  }
+  system(cmd.c_str());
 }
-map<string, 
+static void showVersion() {
+  cout << version << endl;
+}
+// map<string,
+
+#endif
