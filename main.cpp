@@ -21,11 +21,16 @@ bool init() {
 }
 long long coverCharStarToDigit(const char* str) {
   long long result = 0;
+  long long flag=1;
+  if(*str=='-'){
+    flag=-1;
+    str++;
+  }
   while(*str!='\0') {
     result=result*10+(*str-'0');
     str++;
   }
-  return result;
+  return result*flag;
 }
 int main(int argc, char const *argv[]) {
   if(!init()) logger.addLog("init failed. exiting...");
@@ -49,13 +54,15 @@ int main(int argc, char const *argv[]) {
   }else if(!strcmp(argv[1],"--status") || !strcmp(argv[1],"-s")) {
     dataproc.updateStatus(globalSystem.viewContribution(), globalSystem.viewContriToday(), globalSystem.viewTiring());
     dataproc.showStatus();
+  }else if(!strcmp(argv[1],"--refresh") || !strcmp(argv[1],"-r")){
+    globalSystem.refresh();
   }else if(!strcmp(argv[1],"--contri") || !strcmp(argv[1],"-c")) {
     globalSystem.addContribution(coverCharStarToDigit(argv[2]));
   }else if(!strcmp(argv[1],"--conday") || !strcmp(argv[1],"-d")) {
     globalSystem.addContritoday(coverCharStarToDigit(argv[2]));
   }else if(!strcmp(argv[1],"--tiring") || !strcmp(argv[1],"-t")) {
     globalSystem.addTiring(coverCharStarToDigit(argv[2]));
-  }else {
+  }else { 
     taskInterface(&argv[1], argc-1);
   }
   // cout << coverCharStarToDigit(argv[1]) << endl;

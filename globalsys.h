@@ -26,7 +26,13 @@ public:
   long long viewContriToday();
   void addTiring(long long incValue);
   long long viewTiring();
-
+  void refresh() {
+    // addContritoday(-viewContriToday()); // 会清空全局的contribution
+    clearFile(contritodayHandle);
+    ofstream fout(contritodayHandle);
+    fout << 0;
+    fout.close();
+  }
 };
 
 #endif
