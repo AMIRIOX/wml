@@ -22,7 +22,7 @@ void DataProcessor::showSingleStatus(string name) {
   }
   double percent = (double(readval)/100.0);
   string nameOut = string("➜")+name+string(":");
-  printf("\033[1;33;41m%s\033[0m",nameOut.c_str());
+  printf("\033[1;33;34m%s\033[0m",nameOut.c_str());
   if(name=="contribution") {
     printf("\033[4;37m %d\n\033[0m", readval);
     return;
@@ -32,7 +32,15 @@ void DataProcessor::showSingleStatus(string name) {
   if(percent>1) needOutNum=STATUS_BAR_LENGTH;
 
   for(int i=1;i<=needOutNum;i++) {
-    cout << "\033[8;37;44m█\033[0m";
+    if(percent<0 || (percent>=0 && percent<0.5)) {
+      cout << "\033[8;37;41m█\033[0m";
+    }else if(percent>=0.5 && percent<1) {
+      cout << "\033[8;37;44m█\033[0m";
+    }else if(percent==1) {
+      cout << "\033[8;37;42m█\033[0m";
+    }else if(percent>1) {
+      cout << "\033[8;37;45m█\033[0m";
+    }
   }
   for(int i=1;i<=STATUS_BAR_LENGTH-needOutNum;i++) {
     cout << "\033[8;37;37m \033[0m";
