@@ -23,8 +23,11 @@ int main(int argc, char const *argv[]) {
   // task: call taskwarrior
   // status/st: show status
   // done/OK: done tasks by taskwarrior, modify the value of status
+  globalSystem.addContritoday(10);
   globalSystem.addContribution(10);
+  dataproc.showStatus();
   dataproc.updateStatus(globalSystem.viewContribution(), globalSystem.viewContriToday(), globalSystem.viewTiring());
+  cout << "--------------------------------------" << endl;
   dataproc.showStatus();
   return 0;
 }

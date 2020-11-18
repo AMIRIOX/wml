@@ -46,7 +46,6 @@ long long SysKernel::readValue(string filename) {
 
 void SysKernel::optValue(string filename, long long change) {
   long long value = readValue(filename);
-  cout << value << endl;
   // freopen(filename.c_str(),"w",stdout);
   ofstream fout;
   fout.open(filename);

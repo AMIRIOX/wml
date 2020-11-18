@@ -10,7 +10,7 @@ private:
   long long contritoday;
   long long tiring;
 protected:
-  const int STATUS_BAR_LENGTH = 70;
+  const double STATUS_BAR_LENGTH = 70;
   // outputWithColor() {
   //     cout << "\033[1;33;41m ➜contribution: [\033[0m ";"
   // }
@@ -19,6 +19,7 @@ public:
   DataProcessor(long long cb, long long ct, long long tir);
   void updateStatus(long long cb, long long ct, long long tir);
   void showStatus();
+  void showSingleStatus(string name);
   long long calcAverageContri(long long days);
   long long calcAverageContriToday(long long days);
   long long calcAverageTiring(long long days);
