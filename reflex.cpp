@@ -7,6 +7,15 @@
 #include "main.h"
 using namespace std;
 
+// //TODO
+// template <class T>
+// class baseOpt {
+// public:
+//   T operator()(Arg..) {
+//
+//   }
+// }
+
 static string version = "0.0.1";
 
 static void taskInterface(const char** args, int num) {
