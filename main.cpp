@@ -49,6 +49,10 @@ int main(int argc, char const *argv[]) {
   // 想到的一些办法:
   // std::map 如果映射string和函数指针, 但函数签名无法统一
   // 策略模式: 有些地方需要反射, 但C++没有反射, 限于水平无法自己实现
+  if(argc==1) {
+    taskInterface(&argv[1], argc-1);
+    return 0;
+  }
   if(!strcmp(argv[1],"--version") || !strcmp(argv[1],"-v")) {
     showVersion();
   }else if(!strcmp(argv[1],"--status") || !strcmp(argv[1],"-s")) {
@@ -62,7 +66,7 @@ int main(int argc, char const *argv[]) {
     globalSystem.addContritoday(coverCharStarToDigit(argv[2]));
   }else if(!strcmp(argv[1],"--tiring") || !strcmp(argv[1],"-t")) {
     globalSystem.addTiring(coverCharStarToDigit(argv[2]));
-  }else { 
+  }else {
     taskInterface(&argv[1], argc-1);
   }
   // cout << coverCharStarToDigit(argv[1]) << endl;
