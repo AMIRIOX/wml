@@ -10,6 +10,8 @@ using namespace std;
 class SysLogger {
 private:
   const string logFile = "/disk02/wmldata/wml/.wml.log";
+  const string recordFile = "/disk02/wmldata/wml/.record.log";
+  const string totalDaysFile = "/disk02/wmldata/wml/daysc.txt";
   // fstream fileio;
 public:
   // SysLogger(){
@@ -32,11 +34,31 @@ public:
     times.insert(0,"[");
     times.pop_back();
     times.push_back(']');
-    // freopen("/disk02/wmldata/wml/.wml.log","a",stdout);
     ofstream fout(logFile,ios::app);
     fout << times << " " << message << endl;
     fout.close();
-    // fclose(stdout);
+  }
+  void addRecord(string recordName, long long value) {
+    string times = getTime();
+    times.insert(0,"[");
+    times.pop_back();
+    times.push_back(']');
+    ofstream fout(recordFile,ios::app);
+    fout << times << " " << recordName << " changed: " << value << endl;
+    fout.close();
+  }
+  void addSummary(long long glcontri, long long daycontri, long long tiring) {
+    string times = getTime();
+    times.insert(0,">");
+    times.pop_back();
+    times.push_back('<');
+    ofstream fout(totalDaysFile,ios::app);
+    fout << times << endl;
+    fout << "until now, global contribution: " << glcontri << endl;
+    fout << "and today's contribution: " << daycontri << endl;
+    fout << "until now tiring value: " << tiring << endl;
+    fout << endl;
+    fout.close();
   }
 };
 
