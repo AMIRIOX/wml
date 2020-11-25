@@ -87,3 +87,7 @@ void SysKernel::addTiring(long long incValue) {
 long long SysKernel::viewTiring() {
   return readValue(tirngHandle);
 }
+
+long long SysKernel::viewTotalDays() {
+ return readValue(totalDaysHandle);
+}
