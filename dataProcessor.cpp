@@ -64,8 +64,10 @@ void DataProcessor::showSingleStatus(string name) {
   printf("\033[5;37m%f%\033[0m", percent*100);
   cout << endl;
 }
-void DataProcessor::showStatus() {
-  printf("%55s","The Wing Master Lab Result Today\n");
+void DataProcessor::showStatus(long long total) {
+  long long cur = total+1;
+  string title = "The Wing Master Lab Result of day "+to_string(cur)+string("\n");
+  printf("%55s",title.c_str());
   showSingleStatus("contribution");
   showSingleStatus("contritoday");
   showSingleStatus("tiring");
