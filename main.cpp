@@ -57,24 +57,26 @@ int main(int argc, char const *argv[]) {
     showVersion();
   }else if(!strcmp(argv[1],"--status") || !strcmp(argv[1],"-s")) {
     dataproc.updateStatus(globalSystem.viewContribution(), globalSystem.viewContriToday(), globalSystem.viewTiring());
-    dataproc.showStatus();
+    dataproc.showStatus(globalSystem.viewTotalDays());
   }else if(!strcmp(argv[1],"--refresh") || !strcmp(argv[1],"-r")){
-    globalSystem.refresh();
+    globalSystem.refresh(logger);
+    logger.addLog("refresh a day.");
   }else if(!strcmp(argv[1],"--contri") || !strcmp(argv[1],"-c")) {
-    globalSystem.addContribution(coverCharStarToDigit(argv[2]));
+    long long dig = coverCharStarToDigit(argv[2]);
+    globalSystem.addContribution(dig);
+    logger.addRecord("Contribution",dig);
   }else if(!strcmp(argv[1],"--conday") || !strcmp(argv[1],"-d")) {
-    globalSystem.addContritoday(coverCharStarToDigit(argv[2]));
+    long long dig = coverCharStarToDigit(argv[2]);
+    globalSystem.addContritoday(dig);
+    logger.addRecord("Single day",dig);
   }else if(!strcmp(argv[1],"--tiring") || !strcmp(argv[1],"-t")) {
-    globalSystem.addTiring(coverCharStarToDigit(argv[2]));
+    long long dig = coverCharStarToDigit(argv[2]);
+    globalSystem.addTiring(dig);
+    logger.addRecord("Single day",dig);
+  }else if(!strcmp(argv[1],"--total") || !strcmp(argv[1],"-a")) {
+      cout << globalSystem.viewTotalDays() << endl;
   }else {
     taskInterface(&argv[1], argc-1);
   }
-  // cout << coverCharStarToDigit(argv[1]) << endl;
-  // cout << coverCharStarToDigit(argv[1]) << endl;
-  // cout << coverCharStarToDigit(argv[1]) << endl;
-  // cout << coverCharStarToDigit(argv[1]) << endl;
-  // cout << coverCharStarToDigit(argv[1]) << endl;
-  // cout << coverCharStarToDigit(argv[1]) << endl;
-
   return 0;
 }
