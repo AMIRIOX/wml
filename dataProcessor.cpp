@@ -11,6 +11,32 @@ void DataProcessor::updateStatus(long long cb, long long ct, long long tir) {
   contritoday = ct;
   tiring = tir;
 }
+void DataProcessor::showTimeRemain(localTimes lts) {
+  double percent = (double(lts.hour)/15.0);
+  double needOutNum = STATUS_BAR_LENGTH*percent;
+  // if(percent>1) needOutNum=STATUS_BAR_LENGTH;
+
+  cout << "[";
+  for(int i=1;i<=STATUS_BAR_LENGTH-needOutNum;i++) {
+    cout << "\033[40;37m \033[0m";
+  }
+
+  for(int i=1;i<=needOutNum;i++) {
+    if(percent>=0 && percent<0.3) {
+      cout << "\033[8;37;41m█\033[0m";
+    }else if(percent>=0.3 && percent<=1) {
+      cout << "\033[8;37;42m█\033[0m";
+    }
+  }
+
+  cout << "] ";
+  printf("\033[1;33;34m➜remaining: \033[0m");
+  printf("%d:%d",lts.hour,lts.minute);
+  cout << endl << lts.hour << "hrs " << lts.minute << "mins remaining.";
+  cout << " Total remained ";
+  printf("\033[5;37m%.2f%\033[0m", percent*100.0);
+  cout << endl;
+}
 void DataProcessor::showSingleStatus(string name) {
   long long readval = 0;
   if(name=="contribution") {
@@ -27,7 +53,7 @@ void DataProcessor::showSingleStatus(string name) {
     printf("\033[4;37m%d\n\033[0m", readval);
     return;
   }
-  printf("\033[1;33;34m%55s\n\033[0m",nameOut.c_str());
+  // printf("\033[1;33;34m%55s\n\033[0m",nameOut.c_str());
   cout << "[";
   double needOutNum = STATUS_BAR_LENGTH*percent;
   if(percent>1) needOutNum=STATUS_BAR_LENGTH;
@@ -58,19 +84,21 @@ void DataProcessor::showSingleStatus(string name) {
   for(int i=1;i<=STATUS_BAR_LENGTH-needOutNum;i++) {
     cout << "\033[8;37;37m \033[0m";
   }
-  cout << "]";
+  cout << "] ";
+  printf("\033[1;33;34m%s \033[0m",nameOut.c_str());
   printf("\033[4;37m%d\033[0m", readval);
-  cout << " ";
-  printf("\033[5;37m%f%\033[0m", percent*100);
+  cout << ", ";
+  printf("\033[5;37m%2f%\033[0m", percent*100.0);
   cout << endl;
 }
-void DataProcessor::showStatus(long long total) {
+void DataProcessor::showStatus(long long total, localTimes lts) {
   long long cur = total+1;
   string title = "The Wing Master Lab Result of day "+to_string(cur)+string("\n");
   printf("%55s",title.c_str());
   showSingleStatus("contribution");
   showSingleStatus("contritoday");
   showSingleStatus("tiring");
+  showTimeRemain(lts);
 }
 long long DataProcessor::calcAverageContri(long long days) {
   return 999;  //TODO

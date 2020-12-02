@@ -57,7 +57,8 @@ int main(int argc, char const *argv[]) {
     showVersion();
   }else if(!strcmp(argv[1],"--status") || !strcmp(argv[1],"-s")) {
     dataproc.updateStatus(globalSystem.viewContribution(), globalSystem.viewContriToday(), globalSystem.viewTiring());
-    dataproc.showStatus(globalSystem.viewTotalDays());
+    localTimes t = timerp.calcTime();
+    dataproc.showStatus(globalSystem.viewTotalDays(),t);
   }else if(!strcmp(argv[1],"--refresh") || !strcmp(argv[1],"-r")){
     globalSystem.refresh(logger);
     logger.addLog("refresh a day.");
@@ -76,8 +77,14 @@ int main(int argc, char const *argv[]) {
   }else if(!strcmp(argv[1],"--total") || !strcmp(argv[1],"-a")) {
       cout << globalSystem.viewTotalDays() << endl;
   }else if(!strcmp(argv[1],"--time")) {
+    // timerp.refresh();
     localTimes t = timerp.calcTime();
     cout << t.hour << "hrs " << t.minute << "mins remaining." << endl;
+  }else if(!strcmp(argv[1],"--remain") || !strcmp(argv[1],"-g")) {
+    // timerp.refresh();
+    localTimes t = timerp.calcTime();
+    dataproc.showTimeRemain(t);
+    // cout << t.hour << "hrs " << t.minute << "mins remaining." << endl;
   }else {
     taskInterface(&argv[1], argc-1);
   }

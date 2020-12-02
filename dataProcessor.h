@@ -18,7 +18,8 @@ public:
   DataProcessor(): contribution(0), contritoday(0), tiring(0) {}
   DataProcessor(long long cb, long long ct, long long tir);
   void updateStatus(long long cb, long long ct, long long tir);
-  void showStatus(long long total);
+  void showStatus(long long total, localTimes lts);
+  void showTimeRemain(localTimes lts);
   void showSingleStatus(string name);
   long long calcAverageContri(long long days);
   long long calcAverageContriToday(long long days);
