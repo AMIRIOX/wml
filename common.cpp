@@ -7,7 +7,9 @@
 class SysKernel;
 class SysLogger;
 class DataProcessor;
+struct timeProcessor;
 
 DataProcessor dataproc;
 SysKernel globalSystem;
 SysLogger logger;
+timeProcessor timerp;

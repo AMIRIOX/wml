@@ -75,6 +75,9 @@ int main(int argc, char const *argv[]) {
     logger.addRecord("Single day",dig);
   }else if(!strcmp(argv[1],"--total") || !strcmp(argv[1],"-a")) {
       cout << globalSystem.viewTotalDays() << endl;
+  }else if(!strcmp(argv[1],"--time")) {
+    localTimes t = timerp.calcTime();
+    cout << t.hour << "hrs " << t.minute << "mins remaining." << endl;
   }else {
     taskInterface(&argv[1], argc-1);
   }

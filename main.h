@@ -4,6 +4,7 @@
 #include "globalsys.h"
 #include "logger.cpp"
 #include "reflex.cpp"
+#include "timeProcessor.cpp"
 #include "dataProcessor.h"
 #include <unistd.h>
 #include <sys/types.h>
@@ -15,9 +16,12 @@
 class SysKernel;
 class SysLogger;
 class DataProcessor;
+struct timeProcessor;
 
 extern DataProcessor dataproc;
 extern SysKernel globalSystem;
 extern SysLogger logger;
+extern timeProcessor timerp;
+
 
 #endif
