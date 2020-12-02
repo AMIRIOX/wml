@@ -16,7 +16,7 @@ using namespace std;
 //   }
 // }
 
-static string version = "0.0.3";
+static string version = "0.0.4";
 
 static void taskInterface(const char** args, int num) {
   string cmd("task ");
